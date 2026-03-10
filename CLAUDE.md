@@ -1,6 +1,6 @@
-# AI Procurement News
+# procure.blog
 
-Public-facing news site for AI in procurement. Replaces the WordPress-based pattern used by AI Insights Hub.
+AI procurement news site. Replaces the WordPress-based pattern used by AI Insights Hub.
 
 ## Architecture
 
@@ -11,10 +11,9 @@ Public-facing news site for AI in procurement. Replaces the WordPress-based patt
 
 ## Deployment
 
-- **Repo:** github.com/DanielWerner91/n8n-procurement-news
+- **Repo:** github.com/DanielWerner91/procure-blog
 - **Vercel Project ID:** `prj_yOy4kWk8FwHBMiLQ4UvGjx1VsM43`
-- **Live URL:** https://n8n-procurement-news.vercel.app
-- **Domain:** TBD (user to configure)
+- **Live URL:** https://procure.blog (+ www)
 
 ## Key Endpoints
 

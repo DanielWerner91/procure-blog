@@ -1,7 +1,7 @@
-export const SITE_NAME = 'AI Procurement News';
+export const SITE_NAME = 'procure.blog';
 export const SITE_DESCRIPTION =
   'The latest news on AI in procurement — new platforms, funding rounds, enterprise adoption, and industry analysis.';
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://procurement-news.vercel.app';
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://procure.blog';
 
 export const CATEGORIES = [
   { slug: 'procurement_platform', label: 'Platforms' },
