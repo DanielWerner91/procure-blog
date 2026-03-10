@@ -11,38 +11,40 @@ export function ArticleContent({ article }: { article: ProcurementArticle }) {
     : '';
 
   return (
-    <article className="mx-auto max-w-3xl">
+    <article className="mx-auto max-w-[680px]">
+      {/* Back link */}
       <Link
         href="/"
-        className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+        className="inline-flex items-center gap-1.5 text-[13px] text-muted-foreground hover:text-foreground transition-colors mb-8 group"
       >
-        <ArrowLeft className="h-4 w-4" />
-        Back to all articles
+        <ArrowLeft className="h-3.5 w-3.5 group-hover:-translate-x-0.5 transition-transform" />
+        All articles
       </Link>
 
+      {/* Header */}
       <header className="mb-8">
-        <div className="flex items-center gap-2 mb-3">
-          <span className="inline-block px-2.5 py-0.5 text-xs font-medium bg-accent/10 text-accent rounded">
+        <div className="flex items-center gap-2.5 mb-4">
+          <span className="inline-block px-2.5 py-1 text-xs font-medium bg-accent/10 text-accent rounded-full">
             {categoryLabel(article.category)}
           </span>
           {date && (
-            <time className="text-sm text-muted-foreground">{date}</time>
+            <time className="text-[13px] text-muted-foreground">{date}</time>
           )}
         </div>
 
-        <h1 className="text-3xl sm:text-4xl font-bold text-foreground leading-tight">
+        <h1 className="text-[28px] sm:text-[34px] font-bold text-foreground leading-[1.2] tracking-tight">
           {article.title}
         </h1>
 
         {article.excerpt && (
-          <p className="mt-3 text-lg text-muted-foreground leading-relaxed">
+          <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
             {article.excerpt}
           </p>
         )}
 
-        <div className="flex items-center gap-4 mt-4 text-sm text-muted-foreground">
-          {article.source_name && (
-            <span>
+        {article.source_name && (
+          <div className="mt-4 pt-4 border-t border-border">
+            <span className="text-[13px] text-muted-foreground">
               Source:{' '}
               {article.source_url ? (
                 <a
@@ -55,38 +57,41 @@ export function ArticleContent({ article }: { article: ProcurementArticle }) {
                   <ExternalLink className="h-3 w-3" />
                 </a>
               ) : (
-                article.source_name
+                <span className="text-foreground">{article.source_name}</span>
               )}
             </span>
-          )}
-        </div>
+          </div>
+        )}
       </header>
 
+      {/* Featured image */}
       {article.featured_image_url && (
-        <div className="relative aspect-video rounded-lg overflow-hidden mb-8 bg-muted">
+        <div className="relative aspect-video rounded-xl overflow-hidden mb-10 bg-muted">
           <Image
             src={article.featured_image_url}
             alt={article.title}
             fill
             className="object-cover"
             priority
-            sizes="(max-width: 768px) 100vw, 768px"
+            sizes="(max-width: 768px) 100vw, 680px"
           />
         </div>
       )}
 
+      {/* Content */}
       <div
-        className="article-content text-foreground"
+        className="article-content"
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
 
+      {/* Tags */}
       {article.tags.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-border">
+        <div className="mt-10 pt-6 border-t border-border">
           <div className="flex flex-wrap gap-2">
             {article.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-1 text-xs bg-muted text-muted-foreground rounded-full"
+                className="px-3 py-1 text-xs bg-secondary text-muted-foreground rounded-full"
               >
                 {tag}
               </span>

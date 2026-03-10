@@ -1,40 +1,74 @@
 import Link from 'next/link';
-import { SITE_NAME, SITE_DESCRIPTION } from '@/lib/constants';
+import { Rss } from 'lucide-react';
+import { SITE_NAME, SITE_DESCRIPTION, CATEGORIES } from '@/lib/constants';
 
 export function Footer() {
+  const topCategories = CATEGORIES.slice(0, 6);
+
   return (
-    <footer className="border-t border-border bg-card mt-16">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8">
-        <div className="flex flex-col md:flex-row justify-between gap-6">
-          <div className="max-w-sm">
-            <h3 className="font-bold text-foreground">{SITE_NAME}</h3>
-            <p className="text-sm text-muted-foreground mt-1">
+    <footer className="border-t border-border bg-secondary/50 mt-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Brand */}
+          <div className="md:col-span-1">
+            <div className="flex items-center gap-2.5 mb-3">
+              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-accent-foreground text-xs font-bold">
+                AI
+              </div>
+              <span className="text-sm font-semibold text-foreground">
+                {SITE_NAME}
+              </span>
+            </div>
+            <p className="text-[13px] text-muted-foreground leading-relaxed max-w-xs">
               {SITE_DESCRIPTION}
             </p>
           </div>
-          <div className="flex gap-8">
-            <div>
-              <h4 className="text-sm font-semibold mb-2">Navigation</h4>
-              <ul className="space-y-1 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/" className="hover:text-foreground transition-colors">
-                    Home
-                  </Link>
-                </li>
-                <li>
+
+          {/* Categories */}
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              Categories
+            </h4>
+            <ul className="space-y-2">
+              {topCategories.map((cat) => (
+                <li key={cat.slug}>
                   <Link
-                    href="/feed.xml"
-                    className="hover:text-foreground transition-colors"
+                    href={`/category/${cat.slug}`}
+                    className="text-[13px] text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    RSS Feed
+                    {cat.label}
                   </Link>
                 </li>
-              </ul>
-            </div>
+              ))}
+            </ul>
+          </div>
+
+          {/* Links */}
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-4">
+              Subscribe
+            </h4>
+            <ul className="space-y-2">
+              <li>
+                <Link
+                  href="/feed.xml"
+                  className="text-[13px] text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-1.5"
+                >
+                  <Rss className="h-3 w-3" />
+                  RSS Feed
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
-        <div className="mt-8 pt-4 border-t border-border text-center text-xs text-muted-foreground">
-          &copy; {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+
+        <div className="mt-10 pt-6 border-t border-border flex items-center justify-between">
+          <p className="text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} {SITE_NAME}
+          </p>
+          <p className="text-xs text-muted-foreground">
+            Powered by AI
+          </p>
         </div>
       </div>
     </footer>
