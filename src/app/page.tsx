@@ -38,6 +38,16 @@ export default async function HomePage({
             <p className="mt-3 text-[15px] sm:text-base text-muted-foreground leading-relaxed">
               {SITE_DESCRIPTION}
             </p>
+            {process.env.NEXT_PUBLIC_BEEHIIV_SUBSCRIBE_URL && (
+              <a
+                href={process.env.NEXT_PUBLIC_BEEHIIV_SUBSCRIBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground text-sm font-medium rounded-md hover:bg-accent/90 transition-colors"
+              >
+                Subscribe to the newsletter
+              </a>
+            )}
           </div>
         </div>
 
