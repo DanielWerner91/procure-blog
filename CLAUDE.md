@@ -37,6 +37,14 @@ AI procurement news site. Replaces the WordPress-based pattern used by AI Insigh
 
 procurement_platform, spend_analytics, supplier_management, contract_intelligence, funding, partnership, product_launch, enterprise_adoption, policy, research, other
 
+## Newsletter Integration
+
+- **Beehiiv publication:** TBD (needs setup)
+- **Subscribe URL env var:** `NEXT_PUBLIC_BEEHIIV_SUBSCRIBE_URL` — gates newsletter CTAs in hero + footer
+- **Newsletter generation:** Handled by Content Flywheel cron (weekly Monday, min 3 articles)
+- **Newsletter API:** `/api/newsletter` returns published articles since a date, consumed by Content Flywheel
+- **n8n newsletter workflow (`ICCuOys8kNThO25i`):** Inactive, replaced by Content Flywheel pipeline
+
 ## Environment Variables
 
 - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` — Supabase connection
@@ -44,3 +52,4 @@ procurement_platform, spend_analytics, supplier_management, contract_intelligenc
 - `NEXT_PUBLIC_SITE_URL` — Public site URL
 - `REVALIDATION_SECRET` — Shared secret for ISR revalidation webhook
 - `NEWSLETTER_API_KEY` — API key for newsletter endpoint
+- `NEXT_PUBLIC_BEEHIIV_SUBSCRIBE_URL` — Beehiiv subscribe page URL (gates newsletter CTAs)
