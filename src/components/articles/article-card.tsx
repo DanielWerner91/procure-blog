@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { format } from 'date-fns';
 import { ArrowUpRight } from 'lucide-react';
@@ -18,6 +17,8 @@ export function ArticleCard({
     ? format(new Date(article.published_at), 'MMM d, yyyy')
     : '';
 
+  const href = article.source_url || '#';
+
   if (featured) {
     return (
       <ShineBorder
@@ -27,8 +28,10 @@ export function ArticleCard({
         color={['#0000fe', '#000000', '#0000fe']}
         className="p-0 bg-transparent"
       >
-        <Link
-          href={`/articles/${article.slug}`}
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group block rounded-2xl overflow-hidden bg-card border border-border/60 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300"
         >
           <div className="grid md:grid-cols-2 gap-0">
@@ -67,19 +70,21 @@ export function ArticleCard({
                 </p>
               )}
               <div className="mt-4 flex items-center gap-1.5 text-sm font-medium text-accent">
-                Read article
+                Read at source
                 <ArrowUpRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
               </div>
             </div>
           </div>
-        </Link>
+        </a>
       </ShineBorder>
     );
   }
 
   return (
-    <Link
-      href={`/articles/${article.slug}`}
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="group block rounded-xl overflow-hidden bg-card border border-border/60 hover:border-accent/30 hover:shadow-lg hover:shadow-black/[0.04] transition-all duration-300"
     >
       {/* Image */}
@@ -122,6 +127,6 @@ export function ArticleCard({
           </p>
         )}
       </div>
-    </Link>
+    </a>
   );
 }

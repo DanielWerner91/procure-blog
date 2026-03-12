@@ -16,7 +16,7 @@ export async function GET() {
   const supabase = await createClient();
   const { data: articles } = await supabase
     .from('procurement_articles')
-    .select('title, slug, excerpt, published_at, category')
+    .select('title, slug, excerpt, published_at, category, source_url')
     .eq('status', 'published')
     .order('published_at', { ascending: false })
     .limit(50);
@@ -26,8 +26,8 @@ export async function GET() {
       (a) => `
     <item>
       <title>${escapeXml(a.title)}</title>
-      <link>${SITE_URL}/articles/${a.slug}</link>
-      <guid isPermaLink="true">${SITE_URL}/articles/${a.slug}</guid>
+      <link>${a.source_url ? escapeXml(a.source_url) : `${SITE_URL}`}</link>
+      <guid isPermaLink="false">${a.slug}</guid>
       <description>${escapeXml(a.excerpt || '')}</description>
       <pubDate>${new Date(a.published_at).toUTCString()}</pubDate>
       <category>${escapeXml(a.category)}</category>
