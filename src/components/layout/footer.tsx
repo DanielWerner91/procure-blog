@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Rss, Mail } from 'lucide-react';
 import { SITE_NAME, SITE_DESCRIPTION, CATEGORIES } from '@/lib/constants';
 
@@ -45,9 +46,13 @@ export function Footer() {
           {/* Brand */}
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-3">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-accent text-accent-foreground text-xs font-bold">
-                AI
-              </div>
+              <Image
+                src="/logo.png"
+                alt="procure.blog logo"
+                width={28}
+                height={28}
+                className="rounded-md"
+              />
               <span className="text-sm font-semibold text-foreground">
                 {SITE_NAME}
               </span>

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { ArticleList } from '@/components/articles/article-list';
 import { Marquee } from '@/components/ui/marquee';
+import { HeroHeadline } from '@/components/hero-headline';
 import { SITE_NAME, SITE_DESCRIPTION, ARTICLES_PER_PAGE, CATEGORIES } from '@/lib/constants';
 import type { ProcurementArticle } from '@/lib/types';
 
@@ -32,9 +33,7 @@ export default async function HomePage({
       <section className="bg-gradient-to-b from-hero-gradient-from to-hero-gradient-to border-b border-border/40">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16">
           <div className="max-w-2xl">
-            <h1 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
-              {SITE_NAME}
-            </h1>
+            <HeroHeadline />
             <p className="mt-3 text-[15px] sm:text-base text-muted-foreground leading-relaxed">
               {SITE_DESCRIPTION}
             </p>

@@ -27,23 +27,37 @@
 }
 
 :root {
-  /* Refined editorial — warm stone + emerald accent */
-  --background: #fafaf9;
-  --foreground: #1c1917;
+  /* Clean editorial — black + electric blue */
+  --background: #fafafa;
+  --foreground: #0a0a0a;
   --card: #ffffff;
-  --card-foreground: #1c1917;
-  --primary: #0c0a09;
-  --primary-foreground: #fafaf9;
-  --secondary: #f5f5f4;
-  --secondary-foreground: #1c1917;
-  --muted: #f5f5f4;
-  --muted-foreground: #78716c;
-  --accent: #059669;
+  --card-foreground: #0a0a0a;
+  --primary: #000000;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #0000fe;
   --accent-foreground: #ffffff;
-  --border: #e7e5e4;
+  --border: #e5e5e5;
   --radius: 0.625rem;
-  --hero-gradient-from: #f0fdf4;
-  --hero-gradient-to: #fafaf9;
+  --hero-gradient-from: #eef2ff;
+  --hero-gradient-to: #fafafa;
+}
+
+@keyframes shine {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+@utility animate-shine {
+  animation: shine var(--duration) infinite linear;
+}
+
+@utility bg-shine-size {
+  background-size: 300% 300%;
 }
 
 @keyframes marquee {
@@ -70,7 +84,7 @@
 
 /* Article content typography */
 .article-content {
-  @apply text-[17px] leading-[1.8] text-stone-800;
+  @apply text-[17px] leading-[1.8] text-neutral-800;
 }
 .article-content h1 {
   @apply text-3xl font-bold mt-10 mb-4 text-foreground;

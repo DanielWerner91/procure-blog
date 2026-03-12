@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Rss, Menu, X, ChevronDown } from 'lucide-react';
 import { useState } from 'react';
@@ -18,9 +19,13 @@ export function Header() {
         <div className="flex h-14 items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-accent-foreground text-sm font-bold">
-              AI
-            </div>
+            <Image
+              src="/logo.png"
+              alt="procure.blog logo"
+              width={32}
+              height={32}
+              className="rounded-md"
+            />
             <span className="text-[15px] font-semibold text-foreground tracking-tight">
               {SITE_NAME}
             </span>
