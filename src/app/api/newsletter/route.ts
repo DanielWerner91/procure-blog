@@ -4,7 +4,8 @@ import { SITE_URL } from '@/lib/constants';
 
 export async function GET(request: NextRequest) {
   const apiKey = request.headers.get('x-api-key');
-  if (apiKey !== process.env.NEWSLETTER_API_KEY) {
+  // H-03 fix: reject when env var is missing or empty
+  if (!process.env.NEWSLETTER_API_KEY || apiKey !== process.env.NEWSLETTER_API_KEY) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -12,6 +13,14 @@ export async function GET(request: NextRequest) {
   if (!since) {
     return NextResponse.json(
       { error: 'Missing "since" query parameter (YYYY-MM-DD)' },
+      { status: 400 },
+    );
+  }
+
+  // H-04 fix: validate since parameter format to prevent DB info leaks
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(since)) {
+    return NextResponse.json(
+      { error: 'Invalid "since" format. Expected YYYY-MM-DD.' },
       { status: 400 },
     );
   }
@@ -25,7 +34,11 @@ export async function GET(request: NextRequest) {
     .order('published_at', { ascending: false });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error('[newsletter] Supabase error:', error.message);
+    return NextResponse.json(
+      { error: 'Failed to fetch articles. Please try again later.' },
+      { status: 500 },
+    );
   }
 
   const formatted = (articles || []).map((a) => ({
