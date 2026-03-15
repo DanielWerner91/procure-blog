@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = await params;
   const label = categoryLabel(category);
   return {
-    title: `${label} — procure.blog`,
+    title: label,
     description: `Latest AI procurement news in the ${label} category.`,
   };
 }
