@@ -26,14 +26,19 @@ export async function GET() {
       (a) => `
     <item>
       <title>${escapeXml(a.title)}</title>
-      <link>${a.source_url ? escapeXml(a.source_url) : `${SITE_URL}`}</link>
-      <guid isPermaLink="false">${a.slug}</guid>
+      <link>${a.source_url ? escapeXml(a.source_url) : `${SITE_URL}/articles/${escapeXml(a.slug)}`}</link>
+      <guid isPermaLink="true">${SITE_URL}/articles/${escapeXml(a.slug)}</guid>
       <description>${escapeXml(a.excerpt || '')}</description>
       <pubDate>${new Date(a.published_at).toUTCString()}</pubDate>
       <category>${escapeXml(a.category)}</category>
     </item>`,
     )
     .join('');
+
+  const lastBuildDate =
+    articles && articles.length > 0
+      ? new Date(articles[0].published_at).toUTCString()
+      : new Date().toUTCString();
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
@@ -43,7 +48,7 @@ export async function GET() {
     <description>${escapeXml(SITE_DESCRIPTION)}</description>
     <language>en</language>
     <atom:link href="${SITE_URL}/feed.xml" rel="self" type="application/rss+xml" />
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>${items}
+    <lastBuildDate>${lastBuildDate}</lastBuildDate>${items}
   </channel>
 </rss>`;
 
