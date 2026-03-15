@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 
 type TColorProp = string | string[]
@@ -10,7 +11,7 @@ interface ShineBorderProps {
   duration?: number
   color?: TColorProp
   className?: string
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export function ShineBorder({
