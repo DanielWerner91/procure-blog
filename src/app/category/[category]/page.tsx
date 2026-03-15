@@ -29,7 +29,7 @@ export function generateStaticParams() {
 export default async function CategoryPage({ params, searchParams }: Props) {
   const { category } = await params;
   const { page: pageParam } = await searchParams;
-  const page = Math.max(1, parseInt(pageParam || '1', 10));
+  const page = Math.max(1, parseInt(pageParam || '1', 10) || 1);
   const offset = (page - 1) * ARTICLES_PER_PAGE;
 
   const label = categoryLabel(category);
