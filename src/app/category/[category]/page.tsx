@@ -91,23 +91,23 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         {totalPages > 1 && (
           <nav className="flex items-center justify-center gap-3 mt-12">
             {page > 1 && (
-              <a
+              <Link
                 href={`/category/${category}?page=${page - 1}`}
                 className="px-4 py-2 text-[13px] font-medium text-foreground border border-border rounded-lg hover:bg-muted transition-colors"
               >
                 Previous
-              </a>
+              </Link>
             )}
             <span className="px-3 py-2 text-[13px] text-muted-foreground">
               Page {page} of {totalPages}
             </span>
             {page < totalPages && (
-              <a
+              <Link
                 href={`/category/${category}?page=${page + 1}`}
                 className="px-4 py-2 text-[13px] font-medium text-foreground border border-border rounded-lg hover:bg-muted transition-colors"
               >
                 Next
-              </a>
+              </Link>
             )}
           </nav>
         )}
