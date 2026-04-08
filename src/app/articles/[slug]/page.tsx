@@ -119,6 +119,7 @@ export default async function ArticlePage({ params }: Props) {
               src={a.featured_image_url}
               alt={a.title}
               fill
+              unoptimized
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 768px"
               priority

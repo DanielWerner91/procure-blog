@@ -31,6 +31,7 @@ export function ArticleCard({
                 src={article.featured_image_url}
                 alt={article.title}
                 fill
+                unoptimized
                 className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
@@ -108,6 +109,7 @@ export function ArticleCard({
             src={article.featured_image_url}
             alt={article.title}
             fill
+            unoptimized
             className="object-cover group-hover:scale-[1.03] transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
