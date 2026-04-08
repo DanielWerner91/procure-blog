@@ -5,6 +5,7 @@ import type { Metadata } from 'next';
 import { format } from 'date-fns';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import { SITE_NAME, SITE_URL, categoryLabel } from '@/lib/constants';
 import type { ProcurementArticle } from '@/lib/types';
 
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export async function generateStaticParams() {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data } = await supabase
     .from('procurement_articles')
     .select('slug')
