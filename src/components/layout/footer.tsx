@@ -1,37 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Rss, Mail } from 'lucide-react';
+import { Rss } from 'lucide-react';
 import { SITE_NAME, SITE_DESCRIPTION, CATEGORIES } from '@/lib/constants';
-
-function NewsletterSignup() {
-  const beehiivUrl = process.env.NEXT_PUBLIC_BEEHIIV_SUBSCRIBE_URL;
-
-  if (!beehiivUrl) return null;
-
-  return (
-    <div className="md:col-span-3 bg-accent/5 border border-accent/20 rounded-lg p-6 mb-2">
-      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
-        <div className="flex-1">
-          <h4 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-1">
-            <Mail className="h-4 w-4 text-accent" />
-            Get the weekly digest
-          </h4>
-          <p className="text-[13px] text-muted-foreground">
-            AI procurement news, funding rounds, and platform launches — delivered every Monday.
-          </p>
-        </div>
-        <a
-          href={beehiivUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center justify-center px-5 py-2.5 bg-accent text-accent-foreground text-sm font-medium rounded-md hover:bg-accent/90 transition-colors whitespace-nowrap"
-        >
-          Subscribe free
-        </a>
-      </div>
-    </div>
-  );
-}
+import { WaitlistForm } from '@/components/waitlist-form';
 
 export function Footer() {
   const topCategories = CATEGORIES.slice(0, 6);
@@ -41,7 +12,7 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           {/* Newsletter signup — spans full width */}
-          <NewsletterSignup />
+          <WaitlistForm source="footer" variant="card" />
 
           {/* Brand */}
           <div className="md:col-span-1">
