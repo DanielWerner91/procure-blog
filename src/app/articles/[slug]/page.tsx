@@ -8,6 +8,7 @@ import { createClient } from '@/lib/supabase/server';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { SITE_NAME, SITE_URL, categoryLabel } from '@/lib/constants';
 import type { ProcurementArticle } from '@/lib/types';
+import { TrackArticleView } from '@/components/track-article-view';
 
 export const revalidate = 3600;
 
@@ -76,6 +77,7 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <div>
+      <TrackArticleView slug={slug} category={a.category} />
       {/* Header */}
       <section className="bg-gradient-to-b from-hero-gradient-from to-hero-gradient-to border-b border-border/40">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 py-10 sm:py-14">

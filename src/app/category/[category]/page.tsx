@@ -5,6 +5,7 @@ import { ArticleList } from '@/components/articles/article-list';
 import { CATEGORIES, categoryLabel, ARTICLES_PER_PAGE } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import type { ProcurementArticle } from '@/lib/types';
+import { TrackCategoryView } from '@/components/track-category-view';
 
 export const revalidate = 3600;
 
@@ -47,6 +48,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
 
   return (
     <div>
+      <TrackCategoryView category={category} />
       {/* Category header */}
       <section className="bg-gradient-to-b from-hero-gradient-from to-hero-gradient-to border-b border-border/40">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 sm:py-12">
