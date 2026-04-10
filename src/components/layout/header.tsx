@@ -20,7 +20,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <Image
-              src="/logo.png"
+              src="/logo-procure-blog-light-transparent.png"
               alt="procure.blog logo"
               width={32}
               height={32}

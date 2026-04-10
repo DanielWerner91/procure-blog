@@ -18,7 +18,7 @@ export function Footer() {
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-3">
               <Image
-                src="/logo.png"
+                src="/logo-procure-blog-light-transparent.png"
                 alt="procure.blog logo"
                 width={28}
                 height={28}
