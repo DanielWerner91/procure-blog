@@ -2,7 +2,7 @@
 
 import { Mail } from 'lucide-react';
 
-const BEEHIIV_SUBSCRIBE_URL = 'https://procureblog.beehiiv.com/subscribe';
+const BEEHIIV_SUBSCRIBE_URL = 'https://procureblog.beehiiv.com/?modal=signup';
 
 interface SubscribeFormProps {
   source: string;
