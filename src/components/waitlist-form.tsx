@@ -36,7 +36,7 @@ export function WaitlistForm({ source, variant = 'card' }: WaitlistFormProps) {
       }
 
       setStatus('success');
-      setMessage(data.already ? "You're already on the list." : "You're on the list. We'll be in touch.");
+      setMessage(data.already ? "You're already subscribed." : "You're subscribed. First edition coming soon.");
     } catch {
       setStatus('error');
       setMessage('Network error. Please try again.');
@@ -76,7 +76,7 @@ export function WaitlistForm({ source, variant = 'card' }: WaitlistFormProps) {
           disabled={status === 'loading'}
           className="inline-flex items-center justify-center px-4 py-2 bg-accent text-accent-foreground text-sm font-medium rounded-md hover:bg-accent/90 transition-colors disabled:opacity-60 whitespace-nowrap"
         >
-          {status === 'loading' ? 'Joining…' : 'Join the waitlist'}
+          {status === 'loading' ? 'Subscribing…' : 'Subscribe free'}
         </button>
         {status === 'error' && (
           <p className="text-xs text-red-500 sm:w-full">{message}</p>
@@ -113,7 +113,7 @@ export function WaitlistForm({ source, variant = 'card' }: WaitlistFormProps) {
             disabled={status === 'loading'}
             className="inline-flex items-center justify-center px-5 py-2.5 bg-accent text-accent-foreground text-sm font-medium rounded-md hover:bg-accent/90 transition-colors disabled:opacity-60 whitespace-nowrap"
           >
-            {status === 'loading' ? 'Joining…' : 'Join the waitlist'}
+            {status === 'loading' ? 'Subscribing…' : 'Subscribe free'}
           </button>
         </form>
       </div>
