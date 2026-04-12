@@ -12,7 +12,7 @@ const TOOLS = [
   {
     name: 'ProcureIndex',
     description: 'Price intelligence & should-cost models',
-    href: process.env.NEXT_PUBLIC_PROCURE_INDEX_URL || 'https://procure-index.vercel.app',
+    href: process.env.NEXT_PUBLIC_PROCURE_INDEX_URL || 'https://procure-index-dannywerner33-5476s-projects.vercel.app',
     icon: BarChart3,
     external: true,
   },
