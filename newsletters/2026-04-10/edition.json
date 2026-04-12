@@ -1,0 +1,75 @@
+{
+  "subject": "procure.blog TLDR: Apr 10",
+  "preheader": "6 AI procurement stories you need to know",
+  "generated_at": "2026-04-10T16:50:00-04:00",
+  "brand_slug": "procure-blog",
+  "since": "2026-03-27",
+  "sections": [
+    {
+      "id": "top_story",
+      "label": "Top Story",
+      "items": [
+        {
+          "title": "US 2026 National AI Policy Framework proposes sweeping federal procurement standards",
+          "summary": "The White House released a national AI policy framework that would preempt state-level AI rules and require all federal procurement to follow standardized unbiased-AI principles. Federal contractors face new compliance requirements that could reshape how AI vendors sell to government agencies.",
+          "link": "https://procure.blog/articles/us-2026-national-ai-policy-framework-proposes-sweeping-federal-procurement-stand",
+          "category": "policy",
+          "date": "2026-04-10"
+        }
+      ]
+    },
+    {
+      "id": "enterprise_research",
+      "label": "Enterprise & Research",
+      "items": [
+        {
+          "title": "GSA's New AI Clause Would Mandate U.S.-Made AI Systems in Procurement Contracts",
+          "summary": "A proposed GSA clause would require all contractors and subcontractors to use American-made AI systems for federal work, with broad data rights and reporting obligations attached.",
+          "link": "https://procure.blog/articles/gsa-s-new-ai-clause-would-mandate-u-s-made-ai-systems-in-procurement-contracts",
+          "category": "policy",
+          "date": "2026-03-30"
+        },
+        {
+          "title": "NIST to Address Standards for AI in Agentic Procurement",
+          "summary": "NIST announced plans for a public-private convening in April 2026 to set standards for AI agents used in commercial procurement, following a surge in autonomous purchasing tools.",
+          "link": "https://procure.blog/articles/nist-to-address-standards-for-ai-in-agentic-procurement",
+          "category": "policy",
+          "date": "2026-03-27"
+        },
+        {
+          "title": "New research urges procurement teams to redefine supplier risk management in 2026",
+          "summary": "Studies from Achilles and the World Economic Forum call for expanded AI-based supplier risk approaches to handle volatility, compliance gaps, and data quality issues.",
+          "link": "https://procure.blog/articles/new-research-urges-procurement-teams-to-redefine-supplier-risk-management-in-202",
+          "category": "supplier_management",
+          "date": "2026-04-08"
+        }
+      ]
+    },
+    {
+      "id": "product_launches",
+      "label": "Product & Platform",
+      "items": [
+        {
+          "title": "Ironclad Unveils AI Assistant and Agents for Contract Intelligence Platform",
+          "summary": "50% reduction in contract intake time reported by early adopters. Ironclad's new AI agents turn static contracts into real-time operational intelligence with automated extraction and alerts.",
+          "link": "https://procure.blog/articles/ironclad-unveils-ai-assistant-and-agents-for-contract-intelligence-platform",
+          "category": "contract_intelligence",
+          "date": "2026-03-28"
+        }
+      ]
+    },
+    {
+      "id": "quick_hits",
+      "label": "Quick Hits",
+      "items": [
+        {
+          "title": "Why 2026 Chip Shortages Persist and How Procurement Tech Startups Are Responding",
+          "summary": "AI-driven supplier analytics and real-time ECAD integrations are helping procurement teams navigate ongoing semiconductor shortages.",
+          "link": "https://procure.blog/articles/why-2026-chip-shortages-persist-and-how-procurement-tech-startups-are-responding",
+          "category": "spend_analytics",
+          "date": "2026-03-31"
+        }
+      ]
+    }
+  ]
+}
