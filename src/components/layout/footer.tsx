@@ -75,9 +75,21 @@ export function Footer() {
           <p className="text-xs text-muted-foreground">
             &copy; {new Date().getFullYear()} {SITE_NAME}
           </p>
-          <p className="text-xs text-muted-foreground">
-            Powered by AI
-          </p>
+          <div className="flex items-center gap-4 text-xs text-muted-foreground">
+            <Link
+              href="/privacy"
+              className="hover:text-foreground transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="hover:text-foreground transition-colors"
+            >
+              Terms of Service
+            </Link>
+            <span>Powered by AI</span>
+          </div>
         </div>
       </div>
     </footer>
