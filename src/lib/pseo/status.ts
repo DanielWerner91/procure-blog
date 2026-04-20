@@ -49,3 +49,17 @@ export async function listActiveSlugs(): Promise<string[] | null> {
   if (error || !data) return null;
   return (data as Array<{ slug: string }>).map((r) => r.slug);
 }
+
+// Returns the set of promoted slugs so rollup pages can add rel="nofollow" to
+// links pointing at draft/killed pages. Google only passes equity through
+// followed links — nofollowing the draft links concentrates the hub page's
+// ranking power on the few pages that are actually competing in search.
+export async function listPromotedSlugs(): Promise<Set<string>> {
+  const { data, error } = await anonClient()
+    .from('pseo_pages')
+    .select('slug')
+    .eq('brand', 'procure-blog')
+    .eq('status', 'promoted');
+  if (error || !data) return new Set();
+  return new Set((data as Array<{ slug: string }>).map((r) => r.slug));
+}

@@ -40,6 +40,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.5,
   }));
 
+  // Data hub + category rollups: indexable hub pages that link to the
+  // promoted detail pages. Only include categories that have at least one
+  // promoted child, so we don't ship an empty hub for categories that are
+  // still all draft.
+  const { data: promotedCategories } = await supabase
+    .from('pseo_pages')
+    .select('category')
+    .eq('brand', 'procure-blog')
+    .eq('status', 'promoted');
+  const activeCategories = new Set(
+    (promotedCategories ?? []).map((r: { category: string }) => r.category),
+  );
+
+  const dataHubUrls: MetadataRoute.Sitemap =
+    activeCategories.size > 0
+      ? [
+          {
+            url: `${SITE_URL}/data`,
+            changeFrequency: 'weekly',
+            priority: 0.7,
+          },
+          ...Array.from(activeCategories).map((cat) => ({
+            url: `${SITE_URL}/data/${cat}`,
+            changeFrequency: 'weekly' as const,
+            priority: 0.6,
+          })),
+        ]
+      : [];
+
   return [
     {
       url: SITE_URL,
@@ -48,6 +77,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...categoryUrls,
     ...articleUrls,
+    ...dataHubUrls,
     ...pseoUrls,
   ];
 }
