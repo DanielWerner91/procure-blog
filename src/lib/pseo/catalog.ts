@@ -4,7 +4,7 @@
 // the deliberately-curated subset plus SEO-friendly slugs and display names
 // chosen to match user queries.
 
-export type PseoCategory = 'energy';
+export type PseoCategory = 'energy' | 'metals';
 
 export interface PseoEntry {
   slug: string;
@@ -87,7 +87,72 @@ export const PSEO_ENERGY: PseoEntry[] = [
   { slug: 'us-electricity-retail-price', indexId: 'elec_us', category: 'energy', title: 'US Average Retail Electricity Price', h1: 'US average retail electricity price', intent: 'price', country: 'US', region: 'Americas' },
 ];
 
-export const PSEO_CATALOG: readonly PseoEntry[] = PSEO_ENERGY;
+export const PSEO_METALS: PseoEntry[] = [
+  // Base metals (LME)
+  { slug: 'aluminum-price-lme', indexId: 'aluminum', category: 'metals', title: 'LME Aluminum Price', h1: 'Aluminum price (LME)', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'copper-price-lme', indexId: 'copper', category: 'metals', title: 'LME Copper Price', h1: 'Copper price (LME)', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'nickel-price-lme', indexId: 'nickel', category: 'metals', title: 'LME Nickel Price', h1: 'Nickel price (LME)', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'zinc-price-lme', indexId: 'zinc', category: 'metals', title: 'LME Zinc Price', h1: 'Zinc price (LME)', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'tin-price-lme', indexId: 'tin', category: 'metals', title: 'LME Tin Price', h1: 'Tin price (LME)', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'lead-price-lme', indexId: 'lead', category: 'metals', title: 'LME Lead Price', h1: 'Lead price (LME)', intent: 'price', country: 'Global', region: 'Global' },
+
+  // Iron ore
+  { slug: 'iron-ore-price-china-import', indexId: 'ironore', category: 'metals', title: 'Iron Ore Price (China Import)', h1: 'Iron ore price (China import)', intent: 'price', country: 'Global', region: 'Global' },
+
+  // Steel PPI
+  { slug: 'us-steel-mill-ppi', indexId: 'ppi_steel', category: 'metals', title: 'US Steel Mill Products PPI', h1: 'US steel mill products PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-iron-steel-ppi', indexId: 'ppi_iron_steel_all', category: 'metals', title: 'US Iron & Steel PPI (Aggregate)', h1: 'US iron & steel PPI (aggregate)', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-steel-scrap-ppi', indexId: 'ppi_steel_scrap', category: 'metals', title: 'US Steel Scrap PPI', h1: 'US iron & steel scrap PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-cold-rolled-steel-ppi', indexId: 'ppi_cold_rolled', category: 'metals', title: 'US Cold Rolled Steel Sheet PPI', h1: 'US cold rolled steel sheet & strip PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-hot-rolled-steel-ppi', indexId: 'ppi_hot_rolled_bars', category: 'metals', title: 'US Hot Rolled Steel PPI', h1: 'US hot rolled bars, plates & structural PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-steel-pipe-tube-ppi', indexId: 'ppi_steel_pipe_tube', category: 'metals', title: 'US Steel Pipe & Tube PPI', h1: 'US steel pipe & tube PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-stainless-steel-scrap-ppi', indexId: 'ppi_stainless_steel', category: 'metals', title: 'US Stainless Steel Scrap PPI', h1: 'US stainless steel scrap PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+
+  // Aluminum products
+  { slug: 'us-aluminum-extruded-ppi', indexId: 'ppi_aluminum_extrude', category: 'metals', title: 'US Aluminum Extruded Products PPI', h1: 'US aluminum extruded product manufacturing PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-aluminum-ingot-ppi', indexId: 'ppi_aluminum_ingot', category: 'metals', title: 'US Aluminum Ingot PPI', h1: 'US primary aluminum ingot PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+
+  // Copper products
+  { slug: 'us-copper-brass-mill-ppi', indexId: 'ppi_copper_mill', category: 'metals', title: 'US Copper & Brass Mill PPI', h1: 'US copper & brass mill shapes PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-copper-wire-ppi', indexId: 'ppi_copper_wire', category: 'metals', title: 'US Copper Wire PPI', h1: 'US copper wire & cable PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-copper-rolling-ppi', indexId: 'ppi_copper_rolling', category: 'metals', title: 'US Copper Rolling & Drawing PPI', h1: 'US copper rolling, drawing, extruding PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+
+  // Nonferrous aggregate
+  { slug: 'us-nonferrous-metals-ppi', indexId: 'ppi_nonferrous_all', category: 'metals', title: 'US Nonferrous Metals PPI', h1: 'US nonferrous metals PPI (aggregate)', intent: 'ppi', country: 'US', region: 'Americas' },
+
+  // Fabricated metal products PPI
+  { slug: 'us-fabricated-metal-ppi', indexId: 'ppi_fab_metal', category: 'metals', title: 'US Fabricated Metal Products PPI', h1: 'US fabricated metal products PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-wire-cable-ppi', indexId: 'ppi_wire', category: 'metals', title: 'US Wire & Cable PPI', h1: 'US wire & cable PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-metal-tank-ppi', indexId: 'ppi_tank', category: 'metals', title: 'US Metal Tank Manufacturing PPI', h1: 'US metal tank manufacturing PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-forging-stamping-ppi', indexId: 'ppi_forging_stamping', category: 'metals', title: 'US Forging & Stamping PPI', h1: 'US forging & stamping PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-fasteners-ppi', indexId: 'ppi_fasteners', category: 'metals', title: 'US Bolts & Fasteners PPI', h1: 'US bolts, nuts, screws & fasteners PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-forging-stamping-aggregate-ppi', indexId: 'ppi_forging_stamping_agg', category: 'metals', title: 'US Forging & Stamping Aggregate PPI', h1: 'US forging & stamping PPI (4-digit NAICS)', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-cutlery-handtool-ppi', indexId: 'ppi_cutlery_handtool', category: 'metals', title: 'US Cutlery & Handtool PPI', h1: 'US cutlery & handtool manufacturing PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-architectural-metals-ppi', indexId: 'ppi_archit_metalwork', category: 'metals', title: 'US Architectural & Structural Metals PPI', h1: 'US architectural & structural metals PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-fabricated-structural-metal-ppi', indexId: 'ppi_rebar', category: 'metals', title: 'US Fabricated Structural Metal (Rebar) PPI', h1: 'US fabricated structural metal PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-boiler-tank-container-ppi', indexId: 'ppi_boiler_tank', category: 'metals', title: 'US Boiler, Tank & Shipping Container PPI', h1: 'US boiler, tank & shipping container PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-hardware-ppi', indexId: 'ppi_hardware', category: 'metals', title: 'US Hardware Manufacturing PPI', h1: 'US hardware manufacturing PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-spring-wire-product-ppi', indexId: 'ppi_spring_wire', category: 'metals', title: 'US Spring & Wire Product PPI', h1: 'US spring & wire product manufacturing PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-machine-shops-ppi', indexId: 'ppi_machine_shop', category: 'metals', title: 'US Machine Shops PPI', h1: 'US machine shops, turned products, screw PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-coating-engraving-ppi', indexId: 'ppi_coating_engraving', category: 'metals', title: 'US Metal Coating & Engraving PPI', h1: 'US coating, engraving, heat treating PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+  { slug: 'us-ball-bearing-ppi', indexId: 'ppi_ball_bearing', category: 'metals', title: 'US Ball & Roller Bearing PPI', h1: 'US ball & roller bearing manufacturing PPI', intent: 'ppi', country: 'US', region: 'Americas' },
+
+  // Global metals index
+  { slug: 'global-metals-index-imf', indexId: 'idx_metals', category: 'metals', title: 'Global Metals Price Index (IMF)', h1: 'Global metals price index (IMF)', intent: 'index', country: 'Global', region: 'Global' },
+
+  // Rare / battery / precious (IMF PCPS)
+  { slug: 'uranium-u3o8-price', indexId: 'uranium', category: 'metals', title: 'Uranium U3O8 Price', h1: 'Uranium U3O8 price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'lithium-carbonate-price', indexId: 'imf_pcps_lithium', category: 'metals', title: 'Lithium Carbonate Price (IMF PCPS)', h1: 'Lithium carbonate price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'molybdenum-price', indexId: 'imf_pcps_molybdenum', category: 'metals', title: 'Molybdenum Price (IMF PCPS)', h1: 'Molybdenum price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'manganese-price', indexId: 'imf_pcps_manganese', category: 'metals', title: 'Manganese Price (IMF PCPS)', h1: 'Manganese price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'chromium-price', indexId: 'imf_pcps_chromium', category: 'metals', title: 'Chromium Price (IMF PCPS)', h1: 'Chromium price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'rare-earth-elements-price', indexId: 'imf_pcps_rare_earth', category: 'metals', title: 'Rare Earth Elements Price (IMF PCPS)', h1: 'Rare earth elements price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'silicon-price', indexId: 'imf_pcps_silicon', category: 'metals', title: 'Silicon Price (IMF PCPS)', h1: 'Silicon price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'vanadium-price', indexId: 'imf_pcps_vanadium', category: 'metals', title: 'Vanadium Price (IMF PCPS)', h1: 'Vanadium price', intent: 'price', country: 'Global', region: 'Global' },
+  { slug: 'palladium-price', indexId: 'imf_pcps_palladium', category: 'metals', title: 'Palladium Price (IMF PCPS)', h1: 'Palladium price', intent: 'price', country: 'Global', region: 'Global' },
+];
+
+export const PSEO_CATALOG: readonly PseoEntry[] = [...PSEO_ENERGY, ...PSEO_METALS];
 
 export function getEntryBySlug(slug: string): PseoEntry | undefined {
   return PSEO_CATALOG.find((e) => e.slug === slug);
@@ -102,6 +167,11 @@ export const PSEO_CATEGORIES: { slug: PseoCategory; label: string; description: 
     slug: 'energy',
     label: 'Energy',
     description: 'Crude oil, natural gas, coal, electricity, and fuel price data from FRED, EIA, and IMF.',
+  },
+  {
+    slug: 'metals',
+    label: 'Metals',
+    description: 'Base, precious, battery, and rare earth metals. LME prices plus US fabricated metal PPI and IMF PCPS monthly series.',
   },
 ];
 
