@@ -9,6 +9,8 @@ import { createAdminClient } from '@/lib/supabase/admin';
 import { SITE_NAME, SITE_URL, categoryLabel } from '@/lib/constants';
 import type { ProcurementArticle } from '@/lib/types';
 import { TrackArticleView } from '@/components/track-article-view';
+import { detectCommodityLinks } from '@/lib/pseo/commodity-detect';
+import { RelatedDataLinks } from '@/components/pseo/related-data-links';
 
 export const revalidate = 3600;
 
@@ -75,6 +77,11 @@ export default async function ArticlePage({ params }: Props) {
     ? format(new Date(a.published_at), 'MMMM d, yyyy')
     : null;
 
+  const commodityLinks = detectCommodityLinks(
+    `${a.title} ${a.excerpt ?? ''} ${a.content ?? ''}`,
+    { limit: 4 },
+  );
+
   return (
     <div>
       <TrackArticleView slug={slug} category={a.category} />
@@ -136,6 +143,9 @@ export default async function ArticlePage({ params }: Props) {
           className="prose prose-neutral dark:prose-invert max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-a:text-accent prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg"
           dangerouslySetInnerHTML={{ __html: a.content }}
         />
+
+        {/* Related data pages (promoted pSEO slugs only) */}
+        <RelatedDataLinks links={commodityLinks} />
 
         {/* Source attribution */}
         {a.source_url && (
