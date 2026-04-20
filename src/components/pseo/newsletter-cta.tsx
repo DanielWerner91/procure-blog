@@ -13,11 +13,12 @@ interface Props {
   placement: Placement;
   slug: string;
   label: string;
+  category: string;
 }
 
 const CTA_ID_PREFIX = 'newsletter';
 
-export function NewsletterCta({ placement, slug, label }: Props) {
+export function NewsletterCta({ placement, slug, label, category }: Props) {
   const ctaId = `${CTA_ID_PREFIX}_${placement}`;
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -69,7 +70,7 @@ export function NewsletterCta({ placement, slug, label }: Props) {
           Get weekly {label.toLowerCase()} moves, in plain English.
         </h3>
         <p className="mt-2 text-sm text-muted-foreground">
-          Join the procure.blog digest. Key energy price shifts, what they mean for
+          Join the procure.blog digest. Key {category} price shifts, what they mean for
           procurement, and three buyer-ready takeaways. Free, five minutes.
         </p>
         {status === 'success' ? (
@@ -112,9 +113,8 @@ export function NewsletterCta({ placement, slug, label }: Props) {
     <div
       role="complementary"
       aria-label="Newsletter subscribe"
-      className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 backdrop-blur"
     >
-      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 pr-10">
         <span className="hidden text-sm text-foreground sm:inline">
           Stay on top of {label.toLowerCase()} moves. Weekly digest.
         </span>

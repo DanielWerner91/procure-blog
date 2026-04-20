@@ -87,8 +87,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url,
       type: 'article',
       siteName: SITE_NAME,
+      images: [{ url: '/og-image.png', width: 1200, height: 630 }],
     },
-    twitter: { card: 'summary_large_image', title, description },
+    twitter: {
+      card: 'summary_large_image',
+      title: valueFmt ? `${valueFmt} — ${entry.h1}` : title,
+      description,
+    },
   };
 }
 
@@ -217,7 +222,7 @@ export default async function PseoPage({ params }: Props) {
         <p className="text-base leading-relaxed text-foreground/90">{context}</p>
       </section>
 
-      <NewsletterCta placement="inflow" slug={entry.slug} label={entry.h1} />
+      <NewsletterCta placement="inflow" slug={entry.slug} label={entry.h1} category={entry.category} />
 
       <section aria-label="Related series" className="mt-8">
         <h2 className="mb-3 text-lg font-semibold">Related series</h2>
@@ -236,7 +241,7 @@ export default async function PseoPage({ params }: Props) {
         </ul>
       </section>
 
-      <StickyCtaGate slug={entry.slug} label={entry.h1} />
+      <StickyCtaGate slug={entry.slug} label={entry.h1} category={entry.category} />
     </article>
   );
 }

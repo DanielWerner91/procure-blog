@@ -8,42 +8,51 @@ export function buildDatasetJsonLd(entry: PseoEntry, data: IndexData) {
   const url = `${SITE_URL}/data/${entry.category}/${entry.slug}`;
   const firstDate = data.observations[0]?.date;
   const lastDate = data.observations[data.observations.length - 1]?.date;
-  const temporalCoverage = firstDate && lastDate ? `${firstDate}/${lastDate}` : undefined;
 
   const description = `${entry.h1} (${def.source} series ${def.seriesId}). ${def.frequency === 'D' ? 'Daily' : def.frequency === 'W' ? 'Weekly' : def.frequency === 'M' ? 'Monthly' : 'Periodic'} observations in ${def.unit}.`;
 
-  return {
+  const creatorUrl = sourceUrl(def);
+  const creator: Record<string, string> = {
+    '@type': 'Organization',
+    name: sourceLabel(def),
+  };
+  if (creatorUrl) creator.url = creatorUrl;
+
+  const distribution: Record<string, string>[] = [];
+  if (creatorUrl) {
+    distribution.push({
+      '@type': 'DataDownload',
+      encodingFormat: 'application/json',
+      contentUrl: creatorUrl,
+    });
+  }
+
+  const out: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Dataset',
     name: entry.title,
     description,
     url,
     identifier: def.seriesId,
-    creator: {
-      '@type': 'Organization',
-      name: sourceLabel(def),
-      url: sourceUrl(def),
+    creator,
+    variableMeasured: {
+      '@type': 'PropertyValue',
+      name: def.name,
+      unitText: def.unit,
     },
-    distribution: [
-      {
-        '@type': 'DataDownload',
-        encodingFormat: 'application/json',
-        contentUrl: sourceUrl(def),
-      },
-    ],
-    temporalCoverage,
-    spatialCoverage: entry.country
-      ? {
-          '@type': 'Place',
-          name: entry.country,
-        }
-      : undefined,
-    variableMeasured: def.name,
     measurementTechnique: def.source,
     license: datasetLicense(def),
     isAccessibleForFree: true,
     keywords: [entry.category, def.category, def.subcategory, entry.country].filter(Boolean).join(', '),
   };
+  if (distribution.length) out.distribution = distribution;
+  if (firstDate && lastDate) out.temporalCoverage = `${firstDate}/${lastDate}`;
+  if (firstDate) out.datePublished = firstDate;
+  if (lastDate) out.dateModified = lastDate;
+  if (entry.country) {
+    out.spatialCoverage = { '@type': 'Place', name: entry.country };
+  }
+  return out;
 }
 
 export function buildBreadcrumbJsonLd(entry: PseoEntry, categoryLabel: string) {

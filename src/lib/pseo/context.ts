@@ -86,8 +86,12 @@ export function buildContext(entry: PseoEntry, data: IndexData): string {
     );
   }
 
+  const exposureLabel =
+    entry.country === 'Global' || !entry.country
+      ? `global ${entry.category} exposure`
+      : `${entry.country} ${entry.category} exposure`;
   parts.push(
-    `Procurement teams tracking ${entry.country === 'Global' ? 'global energy exposure' : `${entry.country} energy exposure`} should treat this series as a ${def.frequency === 'W' || def.frequency === 'D' ? 'high-frequency' : 'monthly'} benchmark when repricing contracts, modelling cost-pass-through, or reviewing supplier indexation clauses.`,
+    `Procurement teams tracking ${exposureLabel} should treat this series as a ${def.frequency === 'W' || def.frequency === 'D' ? 'high-frequency' : 'monthly'} benchmark when repricing contracts, modelling cost-pass-through, or reviewing supplier indexation clauses.`,
   );
 
   return parts.filter(Boolean).join(' ');

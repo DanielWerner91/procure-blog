@@ -6,11 +6,12 @@ import { NewsletterCta } from './newsletter-cta';
 interface Props {
   slug: string;
   label: string;
+  category: string;
 }
 
 // Fires the sticky CTA only after 50% scroll OR first chart/table interaction,
 // whichever comes first. Matches research-backed trigger rule from the skill.
-export function StickyCtaGate({ slug, label }: Props) {
+export function StickyCtaGate({ slug, label, category }: Props) {
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(false);
 
@@ -58,16 +59,18 @@ export function StickyCtaGate({ slug, label }: Props) {
   if (!show || dismissed) return null;
 
   return (
-    <div className="relative">
-      <NewsletterCta placement="sticky" slug={slug} label={label} />
-      <button
-        type="button"
-        onClick={onDismiss}
-        aria-label="Dismiss"
-        className="fixed bottom-3 right-3 z-50 rounded-full border bg-background/95 px-2 text-xs text-muted-foreground hover:text-foreground"
-      >
-        ×
-      </button>
+    <div className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 backdrop-blur">
+      <div className="relative">
+        <NewsletterCta placement="sticky" slug={slug} label={label} category={category} />
+        <button
+          type="button"
+          onClick={onDismiss}
+          aria-label="Dismiss"
+          className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full px-2 text-xs text-muted-foreground hover:text-foreground"
+        >
+          ×
+        </button>
+      </div>
     </div>
   );
 }
