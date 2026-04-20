@@ -4,6 +4,7 @@ import { ArticleList } from '@/components/articles/article-list';
 import { Marquee } from '@/components/ui/marquee';
 import { HeroHeadline } from '@/components/hero-headline';
 import { WaitlistForm } from '@/components/waitlist-form';
+import { ShouldCostPromo } from '@/components/should-cost-promo';
 import { SITE_NAME, SITE_DESCRIPTION, ARTICLES_PER_PAGE, CATEGORIES } from '@/lib/constants';
 import type { ProcurementArticle } from '@/lib/types';
 
@@ -57,6 +58,9 @@ export default async function HomePage({
           </Marquee>
         </div>
       </section>
+
+      {/* Should-cost promo (first page only — readers scrolling past page 1 already know the tool) */}
+      {page === 1 && <ShouldCostPromo />}
 
       {/* Articles */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
