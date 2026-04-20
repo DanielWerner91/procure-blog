@@ -36,3 +36,16 @@ export async function getPseoStatus(slug: string): Promise<PseoPageRow | null> {
   if (error || !data) return null;
   return data as PseoPageRow;
 }
+
+// Returns the slugs that should be prerendered. Excludes killed pages.
+// Returns null if Supabase is unreachable so the build can fall back to the
+// full catalog rather than skipping every page.
+export async function listActiveSlugs(): Promise<string[] | null> {
+  const { data, error } = await anonClient()
+    .from('pseo_pages')
+    .select('slug')
+    .eq('brand', 'procure-blog')
+    .in('status', ['draft', 'promoted']);
+  if (error || !data) return null;
+  return (data as Array<{ slug: string }>).map((r) => r.slug);
+}

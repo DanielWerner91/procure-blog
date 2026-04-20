@@ -12,7 +12,7 @@ import { fetchIndexData, type IndexData } from '@/lib/pseo/index-fetch';
 import { buildContext } from '@/lib/pseo/context';
 import { sourceLabel, sourceUrl } from '@/lib/pseo/source-meta';
 import { buildDatasetJsonLd, buildBreadcrumbJsonLd } from '@/lib/pseo/json-ld';
-import { getPseoStatus } from '@/lib/pseo/status';
+import { getPseoStatus, listActiveSlugs } from '@/lib/pseo/status';
 import { PseoTracker } from '@/components/pseo/tracker';
 import { InlineChart } from '@/components/pseo/inline-chart';
 import { DataTable } from '@/components/pseo/data-table';
@@ -25,8 +25,13 @@ interface Props {
   params: Promise<{ category: string; slug: string }>;
 }
 
-export function generateStaticParams() {
-  return PSEO_CATALOG.map((e) => ({ category: e.category, slug: e.slug }));
+export async function generateStaticParams() {
+  const active = await listActiveSlugs();
+  const allowed = active ? new Set(active) : null;
+  const entries = allowed
+    ? PSEO_CATALOG.filter((e) => allowed.has(e.slug))
+    : PSEO_CATALOG;
+  return entries.map((e) => ({ category: e.category, slug: e.slug }));
 }
 
 function latestValueFmt(data: IndexData): string | null {
@@ -100,8 +105,11 @@ export default async function PseoPage({ params }: Props) {
   const cat = getCategory(category);
   if (!entry || !cat || entry.category !== category) notFound();
 
+  const status = await getPseoStatus(entry.slug);
+  if (status?.status === 'killed') notFound();
+
   const data = await fetchIndexData(entry.indexId);
-  if (!data) notFound();
+  if (!data || data.observations.length === 0) notFound();
 
   const context = buildContext(entry, data);
   const datasetJsonLd = buildDatasetJsonLd(entry, data);
