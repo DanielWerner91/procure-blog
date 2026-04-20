@@ -42,25 +42,25 @@ export default async function HomePage({
             <WaitlistForm source="hero" variant="inline" />
           </div>
         </div>
-
-        {/* Category marquee */}
-        <div className="border-t border-border/40">
-          <Marquee speed={40} pauseOnHover className="py-3">
-            {CATEGORIES.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/category/${cat.slug}`}
-                className="mx-3 inline-flex items-center px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground bg-card border border-border/60 rounded-full hover:border-accent/30 transition-colors whitespace-nowrap"
-              >
-                {cat.label}
-              </Link>
-            ))}
-          </Marquee>
-        </div>
       </section>
 
       {/* Should-cost promo (first page only — readers scrolling past page 1 already know the tool) */}
       {page === 1 && <ShouldCostPromo />}
+
+      {/* Category marquee */}
+      <div className="border-y border-border/40 bg-background">
+        <Marquee speed={40} pauseOnHover className="py-3">
+          {CATEGORIES.map((cat) => (
+            <Link
+              key={cat.slug}
+              href={`/category/${cat.slug}`}
+              className="mx-3 inline-flex items-center px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground bg-card border border-border/60 rounded-full hover:border-accent/30 transition-colors whitespace-nowrap"
+            >
+              {cat.label}
+            </Link>
+          ))}
+        </Marquee>
+      </div>
 
       {/* Articles */}
       <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10">
