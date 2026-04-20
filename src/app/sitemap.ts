@@ -25,6 +25,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  // pSEO pages: only promoted pages make it to the sitemap. Draft pages stay
+  // orphaned so Google doesn't waste crawl budget on noindex'd URLs.
+  const { data: pseoRows } = await supabase
+    .from('pseo_pages')
+    .select('slug, category, promoted_at')
+    .eq('brand', 'procure-blog')
+    .eq('status', 'promoted');
+
+  const pseoUrls: MetadataRoute.Sitemap = (pseoRows ?? []).map((p) => ({
+    url: `${SITE_URL}/data/${p.category}/${p.slug}`,
+    lastModified: p.promoted_at || undefined,
+    changeFrequency: 'monthly',
+    priority: 0.5,
+  }));
+
   return [
     {
       url: SITE_URL,
@@ -33,5 +48,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     ...categoryUrls,
     ...articleUrls,
+    ...pseoUrls,
   ];
 }
