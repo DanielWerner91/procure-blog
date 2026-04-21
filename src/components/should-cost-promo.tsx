@@ -65,13 +65,13 @@ export function ShouldCostPromo() {
           </p>
 
           <Link
-            href={`${procureIndexUrl}/model`}
+            href={procureIndexUrl}
             target="_blank"
             rel="noopener noreferrer"
             onClick={dismiss}
             className="mt-3 inline-flex items-center gap-1 text-[12px] font-semibold text-accent hover:text-accent/80 transition-colors"
           >
-            Try it free
+            See ProcureIndex
             <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
