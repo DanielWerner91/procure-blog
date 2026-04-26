@@ -15,4 +15,7 @@ export interface ProcurementArticle {
   published_at: string | null;
   created_at: string;
   updated_at: string;
+  posted_to_x: boolean;
+  posted_to_x_at: string | null;
+  x_post_id: string | null;
 }
