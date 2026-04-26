@@ -6,7 +6,7 @@ import { buildTweetText, postTweet } from '@/lib/x';
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
 
-const BATCH_SIZE = 5;
+const BATCH_SIZE = 3;
 
 export async function GET(request: NextRequest) {
   const auth = request.headers.get('authorization');
@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
     .select('id, title, slug, published_at')
     .eq('status', 'published')
     .eq('posted_to_x', false)
-    .order('published_at', { ascending: true })
+    .order('published_at', { ascending: false })
     .limit(BATCH_SIZE);
 
   if (error) {
