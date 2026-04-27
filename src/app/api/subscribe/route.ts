@@ -4,15 +4,9 @@ import { classifyTraffic } from '@/lib/pseo/analytics';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const CF_BASE = process.env.NEWSLETTER_PLATFORM_URL || 'https://content-flywheel.com';
+
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.BEEHIIV_API_KEY;
-  const publicationId = process.env.BEEHIIV_PUBLICATION_ID;
-
-  if (!apiKey || !publicationId) {
-    console.error('[subscribe] Missing BEEHIIV_API_KEY or BEEHIIV_PUBLICATION_ID');
-    return NextResponse.json({ error: 'Newsletter is not configured.' }, { status: 500 });
-  }
-
   let body: { email?: unknown; source?: unknown; pseo?: unknown };
   try {
     body = await request.json();
@@ -28,34 +22,28 @@ export async function POST(request: NextRequest) {
   }
 
   const referrer = request.headers.get('referer')?.slice(0, 500) ?? 'https://procure.blog';
+  const refUrl = safeUrl(referrer);
+  const utmSource = refUrl?.searchParams.get('utm_source') ?? null;
 
   const pseoMeta = parsePseoMeta(body.pseo);
   const pseoSlug = pseoMeta?.slug ?? (source.startsWith('pseo_') ? source.slice(5) : null);
 
   try {
-    const res = await fetch(
-      `https://api.beehiiv.com/v2/publications/${publicationId}/subscriptions`,
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          reactivate_existing: true,
-          send_welcome_email: true,
-          utm_source: source,
-          utm_medium: pseoMeta ? 'pseo' : 'inline_cta',
-          utm_campaign: 'procure_blog',
-          referring_site: referrer,
-        }),
-      },
-    );
+    const res = await fetch(`${CF_BASE}/api/subscribe?brand=procure-blog`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        source,
+        utm_source: utmSource,
+        utm_medium: pseoMeta ? 'pseo' : 'inline_cta',
+        utm_campaign: 'procure_blog',
+      }),
+    });
 
     if (!res.ok) {
       const text = await res.text();
-      console.error('[subscribe] beehiiv error:', res.status, text);
+      console.error('[subscribe] CF newsletter error:', res.status, text);
       return NextResponse.json(
         { error: 'Could not subscribe right now. Please try again later.' },
         { status: 502 },
